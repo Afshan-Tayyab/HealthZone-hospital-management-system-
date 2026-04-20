@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 from decouple import config
 
-
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -26,8 +26,17 @@ SECRET_KEY = 'django-insecure-f^7j_68hhvp$z01(q7%bzzw!-8a7l(1^z=$pkhxt!o^a)^&-+$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'healthzone-hospital-management-system.onrender.com',
+    '*.onrender.com',
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://healthzone-hospital-management-system.onrender.com',
+    'https://*.onrender.com',
+]
 
 # Application definition
 
@@ -78,7 +87,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'HealthZone.wsgi.application'
 
 
-
+# Database - PostgreSQL on Supabase
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -111,21 +120,27 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
 
-
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
-
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# Login URL for protected views
 LOGIN_URL = '/login/'
 
-
+# Google Gemini AI Configuration
 GEMINI_API_KEY = "AIzaSyAuSmMimULM1zrEAXFfNZ5O8jVc_2zPJgM"
+
+# Security Settings for Production
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
