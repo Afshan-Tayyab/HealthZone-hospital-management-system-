@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthZone 🏥 | Doctors Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 30px;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .btn-add {
+            background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 44px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(26, 2, 12, 0.5);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        th {
+            background: rgba(255, 77, 109, 0.2);
+            padding: 15px;
+            text-align: left;
+            color: #ffd6dc;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 143, 163, 0.2);
+            color: #cfb5bc;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-edit, .btn-delete {
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .btn-edit {
+            background: rgba(255, 77, 109, 0.2);
+            color: #ffb7c5;
+            border: 1px solid #ff4d6d;
+        }
+        .btn-delete {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff8888;
+            border: 1px solid #ff0000;
+        }
+        .btn-edit:hover, .btn-delete:hover {
+            transform: translateY(-2px);
+        }
+        .btn-edit:hover {
+            background: rgba(255, 77, 109, 0.4);
+        }
+        .btn-delete:hover {
+            background: rgba(255, 0, 0, 0.4);
+        }
+        .alert {
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .alert-success {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid green;
+            color: #90ff90;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ffb7c5;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #ff4d6d;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>👨‍⚕️ Doctors Management</h1>
+        <a href="{% url 'add_doctor' %}" class="btn-add">+ Add New Doctor</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Specialty</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doctor in doctors %}
+                <tr>
+                    <td>{{ doctor.id }}</td>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.specialty }}</td>
+                    <td>{{ doctor.phone }}</td>
+                    <td>{{ doctor.email }}</td>
+                    <td>{{ doctor.availability }}</td>
+                    <td class="action-buttons">
+                        <a href="{% url 'edit_doctor' doctor.id %}" class="btn-edit">✏️ Edit</a>
+                        <a href="{% url 'delete_doctor' doctor.id %}" class="btn-delete">🗑️ Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" style="text-align: center;">
+                        No doctors found.
+                        <a href="{% url 'add_doctor' %}" style="color: #ff4d6d;">Add your first doctor!</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <a href="/dashboard/" class="back-link">← Back to Dashboard</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthZone 🏥 | Add Doctor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .header p {
+            color: #cfaeb6;
+            margin-top: 8px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffb7c5;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #2a0a12;
+            border: 1px solid #ff4d6d;
+            border-radius: 16px;
+            color: white;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff9eb5;
+            box-shadow: 0 0 5px rgba(255, 77, 109, 0.5);
+        }
+        .form-group input::placeholder {
+            color: #8a5a66;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-submit {
+            background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+        }
+        .btn-cancel {
+            background: transparent;
+            border: 2px solid #ff4d6d;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: #ffb7c5;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+        .btn-cancel:hover {
+            background: rgba(255, 77, 109, 0.2);
+            transform: translateY(-2px);
+        }
+        .alert {
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .alert-error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid red;
+            color: #ff9090;
+        }
+        @media (max-width: 550px) {
+            .container {
+                padding: 25px;
+            }
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>👨‍⚕️ Add New Doctor</h1>
+        <p>Fill in the details to add a new doctor</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- ONLY CHANGE HERE -->
+    <form method="POST" action="{% url 'add_doctor' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" name="name" placeholder="Enter doctor's full name" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Specialty *</label>
+            <input type="text" name="specialty" placeholder="e.g., Cardiologist, Neurologist" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" name="phone" placeholder="e.g., 1234567890" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" name="email" placeholder="doctor@example.com" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Availability</label>
+            <input type="text" name="availability" placeholder="e.g., Mon-Fri 9AM-5PM">
+        </div>
+        
+        <div class="form-buttons">
+            <button type="submit" class="btn-submit">✅ Save Doctor</button>
+            <a href="/doctors/" class="btn-cancel">❌ Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

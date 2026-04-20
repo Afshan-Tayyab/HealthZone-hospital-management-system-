@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthZone 🏥 | Update Doctor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+        .message {
+            background: rgba(0, 255, 0, 0.15);
+            border: 1px solid #00ff00;
+            border-radius: 16px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #90ff90;
+        }
+        .doctor-details {
+            background: rgba(255, 77, 109, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .doctor-details p {
+            margin: 10px 0;
+            color: #cfb5bc;
+        }
+        .doctor-details strong {
+            color: #ffb7c5;
+            display: inline-block;
+            width: 100px;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .btn-back {
+            background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            flex: 1;
+        }
+        .btn-list {
+            background: transparent;
+            border: 2px solid #ff4d6d;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: #ffb7c5;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+        .btn-back:hover, .btn-list:hover {
+            transform: translateY(-2px);
+        }
+        .btn-back:hover {
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+        .btn-list:hover {
+            background: rgba(255, 77, 109, 0.2);
+        }
+        @media (max-width: 550px) {
+            .container {
+                padding: 25px;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="success-icon">✅</div>
+    <div class="header">
+        <h1>Doctor Updated Successfully!</h1>
+    </div>
+
+    <div class="message">
+        The doctor's information has been updated in the database.
+    </div>
+
+    <div class="doctor-details">
+        <p><strong>👨‍⚕️ Name:</strong> {{ doctor.name }}</p>
+        <p><strong>🏥 Specialty:</strong> {{ doctor.specialty }}</p>
+        <p><strong>📞 Phone:</strong> {{ doctor.phone }}</p>
+        <p><strong>📧 Email:</strong> {{ doctor.email }}</p>
+        <p><strong>📅 Availability:</strong> {{ doctor.availability|default:"Not specified" }}</p>
+    </div>
+
+    <div class="button-group">
+        <!-- FIXED LINKS -->
+        <a href="/doctors/" class="btn-back">📋 Back to Doctors List</a>
+        <a href="/doctors/edit/{{ doctor.id }}/" class="btn-list">✏️ Edit Again</a>
+    </div>
+</div>
+</body>
+</html>

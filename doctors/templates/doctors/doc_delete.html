@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthZone 🏥 | Delete Doctor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+            text-align: center;
+        }
+        .warning-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #ff4d6d;
+            margin-bottom: 15px;
+        }
+        .doctor-name {
+            background: rgba(255, 77, 109, 0.2);
+            border-radius: 16px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            color: #ffb7c5;
+        }
+        .warning-message {
+            color: #cfaeb6;
+            margin-bottom: 20px;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .btn-delete {
+            background: #ff0000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+        }
+        .btn-cancel {
+            background: transparent;
+            border: 2px solid #ff4d6d;
+            padding: 12px 24px;
+            border-radius: 28px;
+            color: #ffb7c5;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+        }
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            background: #cc0000;
+        }
+        .btn-cancel:hover {
+            background: rgba(255, 77, 109, 0.2);
+        }
+        @media (max-width: 550px) {
+            .container {
+                padding: 25px;
+            }
+            .form-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="warning-icon">⚠️</div>
+    <div class="header">
+        <h1>Delete Doctor</h1>
+    </div>
+    
+    <div class="doctor-name">
+        👨‍⚕️ {{ doctor.name }}
+    </div>
+    
+    <div class="warning-message">
+        Are you sure you want to delete this doctor?<br>
+        This action cannot be undone.
+    </div>
+    
+    <form method="POST" action="/doctors/delete/{{ doctor.id }}/">
+        {% csrf_token %}
+        <div class="form-buttons">
+            <button type="submit" class="btn-delete">🗑️ Yes, Delete</button>
+            <!-- FIXED LINE BELOW -->
+            <a href="/doctors/" class="btn-cancel">❌ Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

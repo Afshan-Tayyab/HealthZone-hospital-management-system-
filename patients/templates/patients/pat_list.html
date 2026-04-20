@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Patients</title>
+</head>
+<body>
+
+<h2>Patients List</h2>
+
+<a href="/patients/add/">+ Add Patient</a>
+
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: green;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<table border="1" cellpadding="10">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Specialty</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Actions</th>
+</tr>
+
+{% for patient in patients %}
+<tr>
+    <td>{{ patient.id }}</td>
+    <td>{{ patient.name }}</td>
+    <td>{{ patient.specialty }}</td>
+    <td>{{ patient.phone }}</td>
+    <td>{{ patient.email }}</td>
+    <td>
+        <a href="/patients/edit/{{ patient.id }}/">Edit</a>
+        <a href="/patients/delete/{{ patient.id }}/">Delete</a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="6">No patients found</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

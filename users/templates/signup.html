@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HealthZone 🏥 | Sign Up</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #0c0004;
+    color: #f8f5f6;
+}
+
+.signup-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background: linear-gradient(105deg, rgba(8, 1, 4, 0.85) 0%, rgba(30, 5, 15, 0.75) 100%), 
+                url('https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=1600') center center/cover no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 56px;
+    background: rgba(10, 2, 6, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 143, 163, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+nav h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav h1::after {
+    content: "🏥";
+    font-size: 1.9rem;
+    background: none;
+    color: #ffb7c5;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #f1e2e6;
+    font-weight: 500;
+    transition: 0.25s ease;
+    position: relative;
+    font-size: 1rem;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #ff8fa3;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #ffeef2;
+}
+
+.signup-container {
+    max-width: 520px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(18, 2, 10, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 56px;
+    padding: 48px 44px;
+    border: 1px solid rgba(255, 143, 163, 0.4);
+    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
+}
+
+.signup-container h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.signup-container > p {
+    text-align: center;
+    color: #cfaeb6;
+    margin-bottom: 36px;
+}
+
+/* Error message styling */
+.error-message {
+    background: rgba(255, 77, 109, 0.2);
+    border: 1px solid #ff4d6d;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    color: #ffb7c5;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-message::before {
+    content: "⚠️";
+    font-size: 1.1rem;
+}
+
+.success-message {
+    background: rgba(0, 255, 0, 0.2);
+    border: 1px solid #00ff00;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    color: #90ff90;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.success-message::before {
+    content: "✅";
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffd6dc;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1.5px solid rgba(255, 143, 163, 0.4);
+    border-radius: 44px;
+    color: #f8f5f6;
+    font-size: 1rem;
+    transition: all 0.3s;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #ff8fa3;
+    box-shadow: 0 0 15px rgba(255, 143, 163, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.form-group input.error {
+    border-color: #ff4d6d;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 44px;
+    border: none;
+    background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 16px;
+}
+
+.signup-btn:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(98deg, #ff5f7e, #ff8eab);
+    box-shadow: 0 14px 28px rgba(255, 77, 109, 0.5);
+}
+
+.login-redirect {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 143, 163, 0.2);
+    color: #bfa3a8;
+}
+
+.login-redirect a {
+    color: #ffb7c5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-redirect a:hover {
+    text-decoration: underline;
+}
+
+.back-home {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.back-link {
+    background: transparent;
+    border: 2px solid #ff8fa3;
+    color: #ffd6dc;
+    padding: 10px 28px;
+    border-radius: 44px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-link:hover {
+    background: #ff8fa322;
+    transform: translateY(-2px);
+}
+
+footer {
+    text-align: center;
+    padding: 32px 20px;
+    background: #040002;
+    border-top: 1px solid #2a0a12;
+    color: #b0848e;
+}
+
+@media (max-width: 900px) {
+    nav { padding: 16px 24px; flex-direction: column; gap: 14px; }
+    nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .signup-container { margin: 0 20px; padding: 36px 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <h1>✦ HealthZone</h1>
+    <ul>
+        <li><a href="/">Home 🏥</a></li>
+        <li><a href="/">Services 🩺</a></li>
+        <li><a href="/">About 🏨</a></li>
+        <li><a href="/contact">Contact 📞</a></li>
+        <li><a href="/login">Login 🔐</a></li>
+        <li><a href="/signup">Signup ✨</a></li>
+    </ul>
+</nav>
+
+<div class="signup-hero">
+    <div class="signup-container">
+        <h2>🏥 Create Account <span>✨</span></h2>
+        <p>Join HealthZone and start your wellness journey</p>
+        
+        <!-- Display Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="success-message">{{ message }}</div>
+                {% else %}
+                    <div class="error-message">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+        {% if form.errors %}
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <div class="error-message">{{ field|title }}: {{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        
+        <form method="POST" action="/signup/">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>👤 Username</label>
+                <input type="text" name="username" id="username" placeholder="Choose a username" 
+                       value="{{ form.username.value|default:'' }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>📧 Email Address</label>
+                <input type="email" name="email" id="email" placeholder="your@email.com" 
+                       value="{{ form.email.value|default:'' }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>🔒 Password</label>
+                <input type="password" name="password1" id="password" placeholder="Create a strong password" required>
+                <small style="color:#8a6a72; font-size:0.75rem; display:block; margin-top:5px;">Password must be at least 8 characters</small>
+            </div>
+            
+            <div class="form-group">
+                <label>✅ Confirm Password</label>
+                <input type="password" name="password2" id="confirmPassword" placeholder="Confirm your password" required>
+            </div>
+            
+            <button type="submit" class="signup-btn">Sign Up → 🏥</button>
+            
+            <div class="login-redirect">
+                Already have an account? <a href="/login">Login here 🔐</a>
+            </div>
+            
+            <div class="back-home">
+                <a href="/" class="back-link">🏠 Back to Homepage</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer><p>🏥 HealthZone — Your trusted healthcare partner 🏥 | Join us today 💙</p></footer>
+
+<script>
+    // Client-side validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirmPassword').value;
+        
+        if(password !== confirm) {
+            e.preventDefault();
+            alert("🏥 Passwords do not match! Please try again.");
+            return false;
+        }
+        
+        if(password.length < 8) {
+            e.preventDefault();
+            alert("🏥 Password must be at least 8 characters long.");
+            return false;
+        }
+        
+        const username = document.getElementById('username').value.trim();
+        if(username.length < 3) {
+            e.preventDefault();
+            alert("🏥 Username must be at least 3 characters long.");
+            return false;
+        }
+        
+        const email = document.getElementById('email').value.trim();
+        if(!email.includes('@') || !email.includes('.')) {
+            e.preventDefault();
+            alert("🏥 Please enter a valid email address.");
+            return false;
+        }
+        
+        return true;
+    });
+</script>
+</body>
+</html>

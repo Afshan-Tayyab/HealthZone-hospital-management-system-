@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthZone 🏥 | Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 56px;
+            background: rgba(10, 2, 6, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 143, 163, 0.3);
+        }
+        nav h1 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #f1e2e6;
+            font-weight: 500;
+        }
+        nav ul li a:hover {
+            color: #ffb7c5;
+        }
+        .dashboard-hero {
+            padding: 60px 40px;
+        }
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .dashboard-header h2 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .dashboard-header p {
+            color: #cfaeb6;
+            margin-top: 12px;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto 60px auto;
+        }
+        .stat-card {
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff8fa3;
+        }
+        .stat-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #ffd6e0;
+        }
+        .stat-card p {
+            color: #cfb5bc;
+        }
+        .dashboard-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .menu-card {
+            background: rgba(26, 2, 12, 0.7);
+            border-radius: 36px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 143, 163, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-12px);
+            border-color: #ff8fa3;
+        }
+        .menu-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        .menu-card h3 {
+            font-size: 1.8rem;
+            color: #ffd6e0;
+            margin-bottom: 15px;
+        }
+        .menu-card p {
+            color: #cfb5bc;
+            margin-bottom: 20px;
+        }
+        .menu-btn {
+            background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 44px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(255, 77, 109, 0.15), rgba(255, 123, 156, 0.08));
+            border-radius: 32px;
+            padding: 25px 35px;
+            margin-bottom: 50px;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .welcome-text h3 {
+            font-size: 1.5rem;
+            color: #ffd6dc;
+        }
+        .welcome-text p {
+            color: #cfaeb6;
+            margin-top: 5px;
+        }
+        .welcome-date {
+            color: #ffb7c5;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 44px;
+        }
+        footer {
+            text-align: center;
+            padding: 32px 20px;
+            background: #040002;
+            color: #b0848e;
+        }
+        @media (max-width: 900px) {
+            nav { padding: 16px 24px; flex-direction: column; }
+            nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+            .dashboard-hero { padding: 40px 20px; }
+            .dashboard-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>✦ HealthZone</h1>
+    <ul>
+        <li><a href="/">Home 🏥</a></li>
+        <li><a href="/doctors/">Doctors 👨‍⚕️</a></li>
+        <li><a href="/patients/">Patients 👥</a></li>
+        <li><a href="/logout/">Logout 🚪</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard-hero">
+    <div class="dashboard-header">
+        <h2>🏥 Welcome to Dashboard ✨</h2>
+        <p>Manage your healthcare activities from one place</p>
+    </div>
+
+    <div class="welcome-banner">
+        <div class="welcome-text">
+            <h3>👋 Hello, {{ user.username }}!</h3>
+            <p>We're glad to have you back. Your health journey continues here.</p>
+        </div>
+        <div class="welcome-date">
+            📅 {% now "F j, Y" %}
+        </div>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card" onclick="window.location.href='/patients/'">
+            <div class="stat-emoji">👥</div>
+            <h3>{{ patient_count|default:"0" }}</h3>
+            <p>Active Patients</p>
+        </div>
+        <div class="stat-card" onclick="window.location.href='/doctors/'">
+            <div class="stat-emoji">👨‍⚕️</div>
+            <h3>{{ doctor_count|default:"0" }}</h3>
+            <p>Expert Doctors</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-emoji">📅</div>
+            <h3>3,892</h3>
+            <p>Appointments</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-emoji">⭐</div>
+            <h3>98%</h3>
+            <p>Satisfaction Rate</p>
+        </div>
+    </div>
+
+    <div class="dashboard-menu">
+        <div class="menu-card" onclick="window.location.href='/patients/'">
+            <div class="menu-emoji">👥</div>
+            <h3>Patients</h3>
+            <p>View and manage patient records, medical history, and treatment plans.</p>
+            <button class="menu-btn">Manage Patients →</button>
+        </div>
+
+        <div class="menu-card" onclick="window.location.href='/doctors/'">
+            <div class="menu-emoji">👨‍⚕️</div>
+            <h3>Doctors</h3>
+            <p>Browse specialist doctors, check availability, and schedule consultations.</p>
+            <button class="menu-btn">View Doctors →</button>
+        </div>
+
+        <div class="menu-card" onclick="window.location.href='/appointments/'">
+            <div class="menu-emoji">📅</div>
+            <h3>Appointments</h3>
+            <p>Schedule, reschedule, or cancel appointments. View appointment history.</p>
+            <button class="menu-btn">Book Appointment →</button>
+        </div>
+    </div>
+</div>
+<div class="menu-card" onclick="window.location.href='/chatbot/'">
+    <div class="menu-emoji">🤖</div>
+    <h3>AI Assistant</h3>
+    <p>Get instant answers to your health questions using AI technology.</p>
+    <button class="menu-btn">Chat Now →</button>
+</div>
+
+
+<footer>
+    <p>🏥 HealthZone — Your health, our priority 🏥 | © 2026</p>
+</footer>
+
+</body>
+</html>

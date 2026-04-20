@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>HealthZone 🏥 | Premium Healthcare</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #0c0004;
+    color: #f8f5f6;
+    scroll-behavior: smooth;
+}
+
+/* ===== HERO WITH HOSPITAL BACKGROUND IMAGE ===== */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(105deg, rgba(8, 1, 4, 0.78) 0%, rgba(30, 5, 15, 0.68) 100%), 
+                url('https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=1600') center center/cover no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 40%, rgba(255, 143, 163, 0.1) 0%, rgba(0,0,0,0.25) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero > div {
+    position: relative;
+    z-index: 3;
+    backdrop-filter: blur(2px);
+    padding: 2rem;
+    border-radius: 48px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 56px;
+    background: rgba(10, 2, 6, 0.7);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 143, 163, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    transition: all 0.3s;
+}
+
+nav h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+nav h1::after {
+    content: "🏥";
+    font-size: 1.9rem;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: #ffb7c5;
+    text-shadow: 0 0 5px rgba(255,79,109,0.5);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #f1e2e6;
+    font-weight: 500;
+    transition: 0.25s ease;
+    position: relative;
+    font-size: 1rem;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #ff8fa3;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: #ffeef2;
+}
+
+/* Hero text */
+.hero h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.hero h2 .hospital-emoji {
+    font-size: 4.2rem;
+    filter: drop-shadow(0 4px 12px rgba(255,105,130,0.6));
+    animation: gentleFloat 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+.hero span {
+    color: #ffb7c5;
+    text-shadow: 0 0 8px rgba(255, 79, 109, 0.5);
+    border-bottom: 2px solid #ff8fa3;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.hero p {
+    margin: 24px 0 28px;
+    font-size: 1.2rem;
+    color: #fbeef2;
+    font-weight: 400;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(4px);
+}
+
+.btn {
+    padding: 14px 42px;
+    border-radius: 44px;
+    border: none;
+    background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.35);
+    letter-spacing: 0.3px;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(98deg, #ff5f7e, #ff8eab);
+    box-shadow: 0 14px 28px rgba(255, 77, 109, 0.5);
+}
+
+/* Sections */
+section {
+    padding: 90px 60px;
+    background: #0b0106;
+    position: relative;
+}
+
+section:nth-child(even) {
+    background: #110208;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 50px;
+    font-weight: 600;
+    background: linear-gradient(120deg, #ffdee5, #ffc0ce);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.section-title .title-emoji {
+    font-size: 2.8rem;
+    filter: drop-shadow(0 2px 6px rgba(255,105,130,0.5));
+}
+
+/* Cards with detailed services */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 36px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(26, 2, 12, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 36px 28px;
+    border-radius: 36px;
+    border: 1px solid rgba(255, 143, 163, 0.3);
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    text-align: center;
+    box-shadow: 0 12px 24px -8px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+    font-size: 1.9rem;
+    margin-bottom: 20px;
+    color: #ffd6e0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.card p {
+    color: #cfb5bc;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin-bottom: 18px;
+}
+
+.card .service-detail {
+    font-size: 0.9rem;
+    color: #ffb7c5;
+    background: rgba(255, 77, 109, 0.15);
+    padding: 10px 14px;
+    border-radius: 40px;
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    border-color: #ff8fa3;
+    background: rgba(55, 8, 28, 0.9);
+    box-shadow: 0 28px 38px -12px rgba(255, 77, 109, 0.35);
+}
+
+/* About section */
+.about {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    background: rgba(20, 2, 10, 0.65);
+    backdrop-filter: blur(6px);
+    padding: 38px 44px;
+    border-radius: 64px;
+    border: 1px solid rgba(255, 141, 167, 0.4);
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: #f0dce2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-emoji {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+    background: rgba(255,143,163,0.2);
+    padding: 10px 28px;
+    border-radius: 100px;
+    display: inline-block;
+    letter-spacing: 8px;
+}
+
+/* ========== CONTACT PAGE SPECIFIC STYLES (same structure as main) ========== */
+.contact-page {
+    min-height: calc(100vh - 80px);
+    padding: 60px 40px 100px;
+    background: linear-gradient(125deg, #0a0106 0%, #0f030a 100%);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1300px;
+    margin: 0 auto;
+    background: rgba(18, 2, 10, 0.55);
+    backdrop-filter: blur(10px);
+    border-radius: 64px;
+    padding: 48px 56px;
+    border: 1px solid rgba(255, 143, 163, 0.3);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contact-info h2 {
+    font-size: 2.2rem;
+    color: #ffd6e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.contact-detail-card {
+    background: rgba(0,0,0,0.35);
+    border-radius: 32px;
+    padding: 28px;
+    border: 1px solid #ff8fa355;
+    transition: 0.25s;
+}
+
+.contact-detail-card:hover {
+    border-color: #ff8fa3;
+    background: rgba(255,143,163,0.08);
+}
+
+.contact-detail-card .emoji-big {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.contact-detail-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #ffc0ce;
+}
+
+.contact-detail-card p, .contact-detail-card a {
+    color: #cfb5bc;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: 0.2s;
+    line-height: 1.5;
+}
+
+.contact-detail-card a:hover {
+    color: #ffb7c5;
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    background: rgba(255,143,163,0.15);
+    padding: 12px 24px;
+    border-radius: 60px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ff8fa355;
+}
+
+.social-icon:hover {
+    background: #ff4d6d22;
+    transform: translateY(-3px);
+    border-color: #ff8fa3;
+}
+
+/* Contact Form */
+.contact-form {
+    background: rgba(10, 2, 6, 0.6);
+    border-radius: 44px;
+    padding: 32px;
+    border: 1px solid rgba(255,143,163,0.35);
+}
+
+.contact-form h3 {
+    font-size: 1.9rem;
+    margin-bottom: 24px;
+    color: #ffe5ea;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid #ff8fa366;
+    border-radius: 28px;
+    color: #f8f5f6;
+    font-size: 1rem;
+    transition: 0.2s;
+    font-family: inherit;
+    outline: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #ff8fa3;
+    box-shadow: 0 0 12px rgba(255,143,163,0.3);
+    background: rgba(0,0,0,0.6);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-btn {
+    background: linear-gradient(95deg, #ff4d6d, #ff7b9c);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 44px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    box-shadow: 0 6px 14px rgba(255,77,109,0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(95deg, #ff5f7e, #ff8eab);
+    box-shadow: 0 12px 24px rgba(255,77,109,0.4);
+}
+
+.map-placeholder {
+    margin-top: 48px;
+    background: rgba(255,143,163,0.08);
+    border-radius: 48px;
+    padding: 28px;
+    text-align: center;
+    border: 1px dashed #ff8fa355;
+}
+
+.back-home {
+    text-align: center;
+    margin-top: 48px;
+}
+
+.back-home .btn-outline {
+    background: transparent;
+    border: 2px solid #ff8fa3;
+    color: #ffd6dc;
+    padding: 12px 32px;
+    border-radius: 44px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-home .btn-outline:hover {
+    background: #ff8fa322;
+    transform: translateY(-2px);
+}
+
+footer {
+    text-align: center;
+    padding: 32px 20px;
+    background: #040002;
+    border-top: 1px solid #2a0a12;
+    color: #b0848e;
+}
+
+footer p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(36px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gentleFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@media (max-width: 1000px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        padding: 32px 28px;
+        gap: 36px;
+    }
+    .contact-page {
+        padding: 40px 20px;
+    }
+    nav {
+        padding: 16px 24px;
+        flex-direction: column;
+        gap: 14px;
+    }
+    nav ul {
+        gap: 22px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero h2 {
+        font-size: 2.4rem;
+        flex-direction: column;
+    }
+    .hero h2 .hospital-emoji {
+        font-size: 3rem;
+    }
+    section {
+        padding: 60px 24px;
+    }
+    .section-title {
+        font-size: 2.1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .hero h2 { font-size: 1.9rem; }
+    .contact-detail-card h3 { font-size: 1.3rem; }
+    .contact-info h2 { font-size: 1.7rem; }
+}
+
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #1c030c; }
+::-webkit-scrollbar-thumb { background: #ff7b9c; border-radius: 12px; }
+</style>
+</head>
+<body>
+
+<!-- ========== HOME PAGE (MAIN) ========== -->
+<div id="home-page">
+<nav>
+    <h1>✦ HealthZone</h1>
+    <ul>
+        <li><a href="#" id="homeLink">Home 🏥</a></li>
+        <li><a href="#" id="servicesLink">Services 🩺</a></li>
+        <li><a href="#" id="aboutLink">About 🏨</a></li>
+        <li><a href="#" id="contactNavLink">Contact 📞</a></li>
+        <li><a href="#" id="loginBtnMain">Login 🔐</a></li>
+        <li><a href="#" id="signupBtnMain">Signup ✨</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <div>
+        <h2>
+            <span class="hospital-emoji">🏥</span>
+            Modern <span>Healthcare</span> Experience
+        </h2>
+        <p>🏨 Advanced medical care · Compassionate healing · Seamless digital access 🏥<br> Your wellness journey starts here with expert support 24/7.</p>
+        <button class="btn" id="getStartedBtn">Get Started → 💙</button>
+    </div>
+</div>
+
+<section id="services-section">
+    <h2 class="section-title">
+        <span class="title-emoji">🏥</span> Premium Medical Services <span class="title-emoji">🩺</span>
+    </h2>
+    <div class="cards">
+        <div class="card">
+            <h3>🩺 Virtual Consultation</h3>
+            <p>Connect with board-certified doctors via HD video call. Get prescriptions, second opinions, and follow-ups without leaving home.</p>
+            <div class="service-detail">⭐ 24/7 availability · 15-min response</div>
+        </div>
+        <div class="card">
+            <h3>📅 Smart Appointments</h3>
+            <p>AI-powered scheduling that matches you with the right specialist. Zero wait time, calendar sync, reminders & reschedule flexibility.</p>
+            <div class="service-detail">⏱️ Same-day slots · multi-language support</div>
+        </div>
+        <div class="card">
+            <h3>📂 Unified Health Records</h3>
+            <p>Centralized access to lab reports, immunization history, radiology images & medications. Share instantly with any provider.</p>
+            <div class="service-detail">🔒 Bank-grade encryption · lifetime access</div>
+        </div>
+    </div>
+</section>
+
+<section style="background: #0a0105; padding-top: 20px;">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 28px;">
+        <div style="background: rgba(255,143,163,0.08); border-radius: 32px; padding: 28px; text-align: center; backdrop-filter: blur(4px); border: 1px solid #ff8fa322;">
+            <div style="font-size: 3rem;">🏥</div>
+            <h3 style="color:#ffd6dc; margin: 12px 0;">Emergency Ready</h3>
+            <p style="color:#cfaeb6;">24h urgent care triage, direct ambulance coordination & ER tracker.</p>
+        </div>
+        <div style="background: rgba(255,143,163,0.08); border-radius: 32px; padding: 28px; text-align: center; backdrop-filter: blur(4px); border: 1px solid #ff8fa322;">
+            <div style="font-size: 3rem;">💊</div>
+            <h3 style="color:#ffd6dc; margin: 12px 0;">Pharmacy Delivery</h3>
+            <p style="color:#cfaeb6;">Prescriptions delivered to your doorstep within hours, with refill reminders.</p>
+        </div>
+        <div style="background: rgba(255,143,163,0.08); border-radius: 32px; padding: 28px; text-align: center; backdrop-filter: blur(4px); border: 1px solid #ff8fa322;">
+            <div style="font-size: 3rem;">🧠</div>
+            <h3 style="color:#ffd6dc; margin: 12px 0;">Mental Wellness</h3>
+            <p style="color:#cfaeb6;">Licensed therapists, counseling sessions & stress management programs.</p>
+        </div>
+    </div>
+</section>
+
+<section id="about-section">
+    <h2 class="section-title">
+        <span class="title-emoji">🏨</span> About HealthZone <span class="title-emoji">❤️‍🩹</span>
+    </h2>
+    <div class="about">
+        <div class="about-emoji">🏥 ✨ 🫀 🏨</div>
+        <p>✨ At <strong>HealthZone 🏥</strong>, we fuse advanced medical technology with human warmth. Our digital ecosystem serves over 2 million patients, connecting them to 5000+ specialists. We believe healthcare should be <strong>proactive, personalized, and borderless</strong>. From AI diagnostics to empathetic support, we are redefining modern medicine. ✨</p>
+        <p>⭐ <strong>Our services include</strong>: 24/7 telemedicine, second opinions, wearable health integration, and preventive care plans. All in one secure platform.</p>
+        <div style="font-size: 1rem; margin-top: 8px;">🏥 <em>“Healing beyond boundaries — because your health matters.”</em> 🏥</div>
+    </div>
+</section>
+
+<footer>
+    <p>🏥 © 2026 HealthZone — where compassion meets innovation 🏥 | All rights reserved. 💙 <span style="font-size:1.2rem;">🏨</span></p>
+</footer>
+</div>
+
+<!-- ========== CONTACT PAGE (hidden initially, same structure & aesthetic) ========== -->
+<div id="contact-page" style="display: none;">
+<nav>
+    <h1>✦ HealthZone</h1>
+    <ul>
+        <li><a href="#" id="homeFromContact">Home 🏥</a></li>
+        <li><a href="#" id="servicesFromContact">Services 🩺</a></li>
+        <li><a href="#" id="aboutFromContact">About 🏨</a></li>
+        <li><a href="#" id="contactActive">Contact 📞</a></li>
+        <li><a href="#" id="loginContact">Login 🔐</a></li>
+        <li><a href="#" id="signupContact">Signup ✨</a></li>
+    </ul>
+</nav>
+
+<div class="contact-page">
+    <div class="contact-grid">
+        <!-- Left side: contact info -->
+        <div class="contact-info">
+            <h2>🏥 Get in Touch <span style="font-size:2rem;">📞</span></h2>
+            <div class="contact-detail-card">
+                <div class="emoji-big">📍</div>
+                <h3>Visit Us</h3>
+                <p>HealthZone Medical Center<br>123 Wellness Avenue, Suite 400<br>San Francisco, CA 94103</p>
+            </div>
+            <div class="contact-detail-card">
+                <div class="emoji-big">📧</div>
+                <h3>Email Support</h3>
+                <p><a href="mailto:support@healthzone.com">support@healthzone.com</a><br><a href="mailto:care@healthzone.com">care@healthzone.com</a> (emergencies)</p>
+            </div>
+            <div class="contact-detail-card">
+                <div class="emoji-big">📞</div>
+                <h3>Phone & Helpdesk</h3>
+                <p>+1 (800) 234-5678 (24/7 Helpline)<br>+1 (415) 555-0199 (Appointments)</p>
+            </div>
+            <div class="contact-detail-card">
+                <div class="emoji-big">🌐</div>
+                <h3>Social Channels</h3>
+                <div class="social-links">
+                    <span class="social-icon">🐦 Twitter</span>
+                    <span class="social-icon">📘 Facebook</span>
+                    <span class="social-icon">📸 Instagram</span>
+                    <span class="social-icon">💼 LinkedIn</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side: contact form -->
+        <div class="contact-form">
+            <h3>🏥 Send us a message <span>💬</span></h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" id="emailAddr" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number (optional)" id="phoneNum">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="How can we help you? 🏥" id="messageBox" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message ✨</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="map-placeholder">
+        🗺️ 📍 <strong>Interactive Map</strong> — 123 Wellness Ave, San Francisco (24/7 access) 🏥
+    </div>
+    
+    <div class="back-home">
+        <a href="#" id="backToHomeBtn" class="btn-outline">🏠 Back to Homepage</a>
+    </div>
+</div>
+
+<footer>
+    <p>🏥 HealthZone Contact Center — always here for you 🏥 | support@healthzone.com</p>
+</footer>
+</div>
+
+<script>
+    // page switching logic
+    const homePage = document.getElementById('home-page');
+    const contactPage = document.getElementById('contact-page');
+
+    function showHome() {
+        homePage.style.display = 'block';
+        contactPage.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showContact() {
+        homePage.style.display = 'none';
+        contactPage.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Navigation from home to contact
+    document.getElementById('contactNavLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        showContact();
+    });
+    // contact page internal: back to home
+    document.getElementById('backToHomeBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHome();
+    });
+    document.getElementById('homeFromContact')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHome();
+    });
+    document.getElementById('servicesFromContact')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHome();
+        setTimeout(() => document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' }), 100);
+    });
+    document.getElementById('aboutFromContact')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHome();
+        setTimeout(() => document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' }), 100);
+    });
+    // login/signup alerts on contact page
+    document.getElementById('loginContact')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("🏥 LOGIN: Secure patient portal - demo access available.");
+    });
+    document.getElementById('signupContact')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("✨ SIGNUP: Create your HealthZone account for full access to services.");
+    });
+
+    // Home page internal links + smooth
+    document.getElementById('homeLink')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    document.getElementById('servicesLink')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' }); });
+    document.getElementById('aboutLink')?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' }); });
+    
+    // login/signup main alerts
+    document.getElementById('loginBtnMain')?.addEventListener('click', (e) => { e.preventDefault(); alert("🏥 LOGIN: Demo — Welcome to HealthZone patient dashboard."); });
+    document.getElementById('signupBtnMain')?.addEventListener('click', (e) => { e.preventDefault(); alert("✨ SIGNUP: Join HealthZone and unlock telemedicine & health records."); });
+    
+    // Get started button
+    document.getElementById('getStartedBtn')?.addEventListener('click', () => {
+        alert("🏥 Welcome! Explore our services or contact us for personalized care.");
+        document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Contact form submission with toast style message
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('fullName')?.value;
+            if(name) {
+                alert(`🏥 Thank you ${name}! Your message has been received. Our care team will respond within 2 hours. 💙`);
+                contactForm.reset();
+            } else {
+                alert("🏥 Please enter your name to send a message.");
+            }
+        });
+    }
+
+    // card hover effects same as before (just for style)
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => alert("🏥 Learn more about this service. Contact us for personalized consultation."));
+    });
+    // extra interactive for service icons
+    console.log("🏥 HealthZone fully loaded — dedicated Contact Page ready.");
+</script>
+</body>
+</html>

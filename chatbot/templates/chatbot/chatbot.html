@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Assistant | HealthZone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+        body {
+            background: #0c0004;
+            color: #f8f5f6;
+            min-height: 100vh;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 56px;
+            background: rgba(10, 2, 6, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 143, 163, 0.3);
+        }
+        nav h1 {
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #f1e2e6;
+            font-weight: 500;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(18, 2, 10, 0.75);
+            border-radius: 32px;
+            padding: 30px;
+            border: 1px solid rgba(255, 143, 163, 0.3);
+        }
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #ffd6dc, #ff9eb5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #cfaeb6;
+            margin-bottom: 30px;
+        }
+        .chat-box {
+            background: rgba(26, 2, 12, 0.5);
+            border-radius: 24px;
+            padding: 20px;
+            min-height: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .user-msg {
+            background: rgba(255, 77, 109, 0.2);
+            border: 1px solid #ff4d6d;
+            border-radius: 18px;
+            padding: 12px 18px;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .ai-msg {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 18px;
+            padding: 12px 18px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .user-label { color: #ffb7c5; }
+        .ai-label { color: #90ff90; }
+        .input-area {
+            display: flex;
+            gap: 15px;
+        }
+        input {
+            flex: 1;
+            padding: 14px 18px;
+            background: #2a0a12;
+            border: 1px solid #ff4d6d;
+            border-radius: 44px;
+            color: white;
+            font-size: 14px;
+        }
+        button {
+            background: linear-gradient(98deg, #ff4d6d, #ff7b9c);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 44px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        footer {
+            text-align: center;
+            padding: 32px;
+            background: #040002;
+            margin-top: 60px;
+        }
+        @media (max-width: 768px) {
+            .chat-container { margin: 20px; padding: 20px; }
+            nav { padding: 16px 24px; flex-direction: column; }
+            nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h1>✦ HealthZone</h1>
+    <ul>
+        <li><a href="/">Home 🏥</a></li>
+        <li><a href="/patients/">Patients 👥</a></li>
+        <li><a href="/doctors/">Doctors 👨‍⚕️</a></li>
+        <li><a href="/appointments/">Appointments 📅</a></li>
+        <li><a href="/dashboard/">Dashboard 📊</a></li>
+    </ul>
+</nav>
+
+<div class="chat-container">
+    <h1>🤖 AI Health Assistant</h1>
+    <p class="subtitle">Ask me anything about health and hospital services</p>
+    
+    <div class="chat-box">
+        {% if request.method == 'POST' %}
+            <div class="user-msg">
+                <div class="label user-label">👤 You</div>
+                <div>{{ request.POST.message }}</div>
+            </div>
+        {% endif %}
+        
+        {% if response %}
+            <div class="ai-msg">
+                <div class="label ai-label">🤖 Health Assistant</div>
+                <div>{{ response|linebreaks }}</div>
+            </div>
+        {% else %}
+            <div class="ai-msg">
+                <div class="label ai-label">🤖 Health Assistant</div>
+                <div>Hello! I'm your AI health assistant. How can I help you today?</div>
+            </div>
+        {% endif %}
+    </div>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div class="input-area">
+            <input type="text" name="message" placeholder="Type your question here..." required>
+            <button type="submit">Send 📤</button>
+        </div>
+    </form>
+</div>
+
+<footer>
+    <p>🏥 HealthZone — AI Assistant powered by Google Gemini 🧠</p>
+</footer>
+
+</body>
+</html>
