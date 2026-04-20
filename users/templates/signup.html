@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up | HealthZone</title>
+    <title>Sign Up</title>
     <style>
         body {
             background: #0c0004;
             color: white;
-            font-family: Arial, sans-serif;
-            padding: 50px;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: rgba(18, 2, 10, 0.75);
+        .box {
+            background: rgba(18, 2, 10, 0.9);
             padding: 40px;
             border-radius: 20px;
-        }
-        h1 {
-            color: #ffd6dc;
-            text-align: center;
+            width: 350px;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
             background: #2a0a12;
             border: 1px solid #ff4d6d;
@@ -30,31 +28,26 @@
             color: white;
         }
         button {
-            background: #ff4d6d;
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            color: white;
             width: 100%;
+            padding: 10px;
+            background: #ff4d6d;
+            border: none;
+            border-radius: 10px;
+            color: white;
             cursor: pointer;
-            font-size: 16px;
         }
         .error {
+            color: #ff9090;
             background: rgba(255,0,0,0.2);
             padding: 10px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            color: #ff9090;
-        }
-        a {
-            color: #ffb7c5;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>🏥 Create Account</h1>
-    <p style="text-align: center;">Join HealthZone and start your wellness journey</p>
+<div class="box">
+    <h2>Sign Up</h2>
     
     {% if messages %}
         {% for message in messages %}
@@ -64,25 +57,16 @@
     
     <form method="POST" action="/signup/">
         {% csrf_token %}
-        
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Choose a username" required>
-        
-        <label>Email Address</label>
-        <input type="email" name="email" placeholder="your@email.com" required>
-        
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Create a strong password" required>
-        
-        <label>Confirm Password</label>
-        <input type="password" name="confirm_password" placeholder="Confirm your password" required>
-        
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
         <button type="submit">Sign Up</button>
-        
-        <p style="text-align: center; margin-top: 20px;">
-            Already have an account? <a href="/login/">Login here</a>
-        </p>
     </form>
+    
+    <p style="text-align:center; margin-top:15px;">
+        <a href="/login/" style="color:#ffb7c5;">Already have account? Login</a>
+    </p>
 </div>
 </body>
 </html>
